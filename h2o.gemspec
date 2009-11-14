@@ -17,6 +17,7 @@ Gem::Specification.new do |s|
 		"lib/h2o/datatype.rb", 
 		"lib/h2o/errors.rb", 
 		"lib/h2o/filters.rb", 
+		"lib/h2o/filters/default.rb",
 		"lib/h2o/nodes.rb", 
 		"lib/h2o/parser.rb", 
 		"lib/h2o/tags.rb", 
