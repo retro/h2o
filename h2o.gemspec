@@ -25,6 +25,7 @@ Gem::Specification.new do |s|
 		"lib/h2o/tags/for.rb", 
 		"lib/h2o/tags/if.rb", 
 		"lib/h2o/tags/with.rb",
+		"lib/h2o/tags/recurse.rb",
 		"lib/core_ext/object.rb",
 		"example/server.rb",
 		"example/run.rb",

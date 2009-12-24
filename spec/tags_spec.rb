@@ -1,4 +1,5 @@
 require 'spec/spec_helper.rb'
+require 'ostruct'
 require 'pp'
 
 describe H2o::Tags::For do
@@ -120,6 +121,28 @@ describe H2o::Tags::If do
       
       parse('{% if ! 2 > 3 %}Y{% endif %}').render.should == 'Y'
     end
+  end
+end
+
+describe H2o::Tags::Recurse do
+  it "should correctly render tree structures" do
+    categories = [
+      {:title => 'First level 1.', :children => [], },
+      {:title => 'First level 2.', :children => [
+        {:title => 'Second level 1.', :children => [
+          {:title => 'Third level 1.', :children => []}
+        ]}
+      ]},
+      {:title => 'First level 3.', :children => [
+        {:title => 'Second level 2.', :children => []}
+      ]}
+    ]
+    
+    template = "{% recurse all_categories with children as category %}<ul>{% loop %}<li><h{{ level }}>{{ category.title }}</h{{ level }}>{% children %}</li>{% endloop %}</ul>{% endrecurse %}"
+    
+    result   = "<ul><li><h1>First level 1.</h1></li><li><h1>First level 2.</h1><ul><li><h2>Second level 1.</h2><ul><li><h3>Third level 1.</h3></li></ul></li></ul></li><li><h1>First level 3.</h1><ul><li><h2>Second level 2.</h2></li></ul></li></ul>"
+    
+    parse(template).render({:all_categories => categories}).should == result
   end
 end
 
