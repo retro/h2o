@@ -75,6 +75,7 @@ ohoh
 {% endif %}
 
 {% block body %}
+  {% block.super %}
   something here
   <h1>{{ page.title | test "", adsf }}</h1>
   <small> {{ page.description }} </small>
