@@ -129,13 +129,17 @@ module H2o
   end
   
   class BlockContext < DataObject
+    
+    def to_h2o
+      [:super]
+    end
+    
     def initialize(block, context, stream, index)
       @block, @context, @stream, @index = block, context, stream, index
     end
     
     def super
       @block.parent.render(@context, @stream, @index-1) if @block.parent.stack_size > @index.abs
-      nil
     end
     
     def depth
